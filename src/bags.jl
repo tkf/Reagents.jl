@@ -32,7 +32,7 @@ function Base.iterate(bag::Bag, (prev, curr) = (bag, @atomic bag.next))
                 msgs = bag,
             )
         end
-        # `prev` may be phisically removed while `curr` is phisically removed.
+        # `prev` may be physically removed while `curr` is physically removed.
         # But this is OK since `curr` is already logically removed.
         # TODO: check this
         curr, ok = @atomicreplace(prev.next, curr => next)

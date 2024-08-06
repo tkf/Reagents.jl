@@ -32,7 +32,7 @@ function nack_demo()
     s1, r1 = Reagents.channel()
     s2, r2 = Reagents.channel()
     #=
-    To receive the negative acknowledgement, we craete one more channel:
+    To receive the negative acknowledgement, we create one more channel:
     =#
     send_gotnack, receive_gotnack = Reagents.channel()
     #=
@@ -55,7 +55,7 @@ function nack_demo()
     choice = br1 | br2
     #=
     Returning the reagents so that they can be invoked differently for trying
-    differnt scenarios:
+    different scenarios:
     =#
     return (; choice, s1, s2, receive_gotnack)
 end
@@ -131,7 +131,7 @@ function unique_id_provider!(request_receive, shutdown_receive)
         receive_request_or_shutdown = request_receive | shutdown_receive
         #=
         When the `shutdown_receive` reagent is chosen (i.e., the reaction result
-        is `nothing`), the short-circuting `@something` evaluates the `break`
+        is `nothing`), the short-circuiting `@something` evaluates the `break`
         statement so that the server exits the loop:
         =#
         (; reply, abort) = @something(receive_request_or_shutdown(), break)
@@ -235,7 +235,7 @@ function test_unique_id_provider()
                 @test unique_id() == prev + 1
                 break
                 #=
-                If `receive` was not tirggered, we keep the id `ans` so that it
+                If `receive` was not triggered, we keep the id `ans` so that it
                 can be used in the next iteration:
                 =#
             else

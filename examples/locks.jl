@@ -21,10 +21,10 @@ end
 # acquire the lock will block until the element is put back into the container:
 
 acquiring(l::SimpleLock) = taking(l.access)
-realeasing(l::SimpleLock) = Return(nothing) ⨟ putting(l.access)
+releasing(l::SimpleLock) = Return(nothing) ⨟ putting(l.access)
 
 Base.lock(l::SimpleLock) = acquiring(l)()
-Base.unlock(l::SimpleLock) = realeasing(l)()
+Base.unlock(l::SimpleLock) = releasing(l)()
 
 # Thus, when creating a lock with an empty container, it is in the locked state.
 # We need to unlock it (i.e., put one element in the container) before start
@@ -187,8 +187,8 @@ end
 
 # ## Semaphore
 #
-# `SimpleLock` can be extended to a semaphore by just initially fillying more
-# than one elements:
+# `SimpleLock` can be extended to a semaphore by just initially filling more
+# than one element:
 
 struct SimpleSemaphore
     accesses::typeof(Blocking(TreiberStack{Nothing}()))
@@ -204,10 +204,10 @@ function SimpleSemaphore(n::Integer)
 end
 
 acquiring(l::SimpleSemaphore) = taking(l.accesses)
-realeasing(l::SimpleSemaphore) = Return(nothing) ⨟ putting(l.accesses)
+releasing(l::SimpleSemaphore) = Return(nothing) ⨟ putting(l.accesses)
 
 Base.acquire(l::SimpleSemaphore) = acquiring(l)()
-Base.release(l::SimpleSemaphore) = realeasing(l)()
+Base.release(l::SimpleSemaphore) = releasing(l)()
 
 # Unlike `SimpleLock`, we can acquire `SimpleSemaphore(n)` `n` times before
 # blocked:
@@ -238,13 +238,13 @@ struct ChLock <: Base.AbstractLock
 end
 
 acquiring(l::ChLock) = l.acq
-realeasing(l::ChLock) = l.rel
+releasing(l::ChLock) = l.rel
 
 Base.lock(l::ChLock) = acquiring(l)()
-Base.unlock(l::ChLock) = realeasing(l)()
+Base.unlock(l::ChLock) = releasing(l)()
 
 # To create two kinds of locks, we create `2 * 2 = 4` channels.  The state of
-# the lock is mantained by two blocking data structures (Note: We only need to
+# the lock is maintained by two blocking data structures (Note: We only need to
 # store at most one element. So, a stack is an overkill.  But that's the most
 # cheap data structure we have implemented so far in the tutorial):
 
@@ -323,7 +323,7 @@ function test_reader_writer_lock()
             sleep(0.1)
             @test !wlocked[]
         end
-        @test r2() === r2() === :done  # releaseing `rlock`
+        @test r2() === r2() === :done  # releasing `rlock`
         @test r1() == 3
         @test wlocked[]
 
@@ -350,10 +350,10 @@ function test_reader_writer_lock()
             sleep(0.1)
             @test r4locked[] == r5locked[] == false
         end
-        @test r2() === :done  # releaseing `wlock`
+        @test r2() === :done  # releasing `wlock`
         @test sort!([r1(), r1()]) == [4, 5]
         @test r4locked[] == r5locked[] == true
-        @test r2() === r2() === :done  # releaseing `rlock`
+        @test r2() === r2() === :done  # releasing `rlock`
     end
 end
 

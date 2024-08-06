@@ -90,7 +90,7 @@ function test_trypopping()
     =#
     @test trypopping(stack)(nothing) === Some(222)
     #=
-    For convinience, `nothing` is the default argument when the reagent is
+    For convenience, `nothing` is the default argument when the reagent is
     called without an argument:
     =#
     @test trypopping(stack)() === Some(111)

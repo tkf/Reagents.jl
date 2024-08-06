@@ -72,14 +72,14 @@ offerid(::Nothing) = UInt(0)
 * `offers::ImmutableList{Offer}`
 * `postcommithooks::ImmutableList{Any}`
 
-* `restart_on_failure::Bool` (default: `false`): A flag controlling if the
+* `restart_on_failure::Bool` (default: `false`): A flag controling if the
   offer should be invalidated on the failure.  Consider `(r | s) ⨟ t` where `s`
   and `t` both contain a `Swap`. When a `Swap` in `s` is triggered from the
   dual, it may indicate that `r` is now reactable (i.e., `s` is used as a
   condition variable).  In this case, it is now required to register the offer
   at `t`.  To support this behavior, `restart_on_failure` is set to `true` in
   the continuations of `Choice` (`|`). Then, in `tryreact!`, the offers of the
-  dual messsage in `Swap` with `restart_on_failure` flag set are aborted.  In
+  dual message in `Swap` with `restart_on_failure` flag set are aborted.  In
   particular, if the state is in `Waiting`, the task is re-scheduled so that
   other branches of `|` can be re-evaluated.
 """

@@ -104,7 +104,7 @@ function test_many_items(constructor, spawn::Bool, nrepeat = 1000)
                 y == sentinel && break
                 push!(dest, y)
             end
-            @debug "`test_many_items`: Reciever $i done"
+            @debug "`test_many_items`: Receiver $i done"
         end
     end
 
@@ -147,7 +147,7 @@ function test_many_items(constructor, spawn::Bool, nrepeat = 1000)
         push!(allreceived, something(y))
         nleft += 1
     end
-    @debug "`test_many_items`: $nleft items not recieved; $ncleaned refs cleaned"
+    @debug "`test_many_items`: $nleft items not received; $ncleaned refs cleaned"
 
     @test length(allreceived) == length(allsent)
     @test sort!(allreceived) == allsent

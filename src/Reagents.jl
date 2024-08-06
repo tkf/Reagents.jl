@@ -17,7 +17,7 @@ struct Retry <: Failure end
 # The original implementation by Turon (2012) combines what is called `Reactor`
 # and `Reagent` here simply as reagent.  This is structurally identical to how
 # Transducers.jl splits transducers (`Reagent` here) and reducing functions
-# (`Reactor` here). It makes implemneting the pairting combinator `&` (`Both`)
+# (`Reactor` here). It makes implementing the pairing combinator `&` (`Both`)
 # easier (which is similar to `Transducers.TeeZip`).
 struct Reactor{R<:Reagent,C}
     reagent::R
@@ -154,8 +154,8 @@ A module that re-exports a subset of Reagents public API at top-level.
 
 Use `using Reagents.*` to import all public APIs. Do not use this inside a
 package. The set of exported names is not the part of stable API. For example,
-if a name collistion with `Base` or important packages are recognized, the
-corresponding name may be removed in the next realease, without incrementing
+if a name collision with `Base` or important packages are recognized, the
+corresponding name may be removed in the next release, without incrementing
 the leading non-zero version number.
 """
 const * = __Reagents_API__

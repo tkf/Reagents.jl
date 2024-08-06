@@ -58,7 +58,7 @@ function tryreact!(
         return tryreact!(Commit(), value, rx, offer)
     elseif ans isa Retry
         # Assuming the continuation has `Swap`, it must eventually return
-        # `Block`.  So, retring the reaction should be fine.
+        # `Block`.  So, retrying the reaction should be fine.
         return ans
     else
         return ans
@@ -69,7 +69,7 @@ hascas(::Map) = false
 maysync(::Map) = false
 # `Map`, `Return`, etc. may return `Block` for nudging reactions to try other
 # branches (and also to indicate that `offer` is required). But these reagents
-# themselves do not attempt to sync. It *seems* like retruning `false` in this
+# themselves do not attempt to sync. It *seems* like returning `false` in this
 # case is more useful; see how `ReturnIfBlocked` use it for deadlock detection.
 
 function tryreact!(actr::Reactor{<:Map}, a, rx::Reaction, offer::Union{Offer,Nothing})

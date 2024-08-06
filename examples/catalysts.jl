@@ -61,7 +61,7 @@ function test_zip2()
     sendall, receiveall = Reagents.channel(Tuple{Int,Char}, Nothing)
 
     #=
-    If the items are aviable in `receive1` and `receive2`, the `catalyst`
+    If the items are available in `receive1` and `receive2`, the `catalyst`
     reagent automatically tries to pass them to `sendall`:
     =#
     catalyst = (receive1 & receive2) ⨟ sendall

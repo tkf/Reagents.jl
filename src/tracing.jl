@@ -19,7 +19,7 @@ macro trace(args...)
         nothing
     end |> esc
 end
-# TODO: Use Preferences.jl to controll if Recalls.jl should be loaded? Since
+# TODO: Use Preferences.jl to control if Recalls.jl should be loaded? Since
 # `args` may affect what variables are captured in closures, the existence of
 # Recalls.jl changes the program slightly.
 

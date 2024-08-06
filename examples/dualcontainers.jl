@@ -22,7 +22,7 @@ function dualcontainer(::Type{T}, Items, Reservations = Items) where {T}
     )
 end
 
-# APIs required for the containres:
+# APIs required for the containers:
 function putting end
 function taking end
 

@@ -22,7 +22,7 @@ function test_promise_fetches()
     p = Promise{Int}()
 
     #=
-    Calling `fetch(p::Promise)` will wait for `p` to be fullfiled:
+    Calling `fetch(p::Promise)` will wait for `p` to be fulfilled:
     =#
     task = @task fetch(p)
     yield(task)
@@ -62,7 +62,7 @@ function test_promise_close_before_fetches()
     close(p)
 
     #=
-    Then, previously blocked `fetch(::Promise)` rasies an exception:
+    Then, previously blocked `fetch(::Promise)` raises an exception:
     =#
     err = try
         wait(t)

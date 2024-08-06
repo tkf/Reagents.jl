@@ -105,7 +105,7 @@ function check_repeat_cancellation(constructor, spawn::Bool; nitems = 100, rando
                 push!(dest, y)
                 randomize && random_sleep()
             end
-            @debug "`check_repeat_cancellation`: Reciever $i done"
+            @debug "`check_repeat_cancellation`: Receiver $i done"
         end
     end
 
@@ -160,7 +160,7 @@ function check_repeat_cancellation(constructor, spawn::Bool; nitems = 100, rando
         push!(allreceived, something(y))
         nleft += 1
     end
-    @debug "`check_repeat_cancellation`: $nleft items not recieved; $ncleaned refs cleaned"
+    @debug "`check_repeat_cancellation`: $nleft items not received; $ncleaned refs cleaned"
 
     # Not using `@test` to avoid overhead in while "fuzzing"
     @check length(allreceived) == length(allsent)
